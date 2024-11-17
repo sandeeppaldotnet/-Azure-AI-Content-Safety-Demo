@@ -1,85 +1,86 @@
-# -Azure-AI-Content-Safety-Demo
-Azure-AI-Content-Safety-Demo
+Azure Content Safety Sample Code
 
-This is a demonstration project for Azure AI Content Safety using C#. The goal of this demo is to show how to integrate Azure's AI capabilities for content moderation and safety into a C# application.
-Overview
-
-The Azure AI Content Safety Demo project helps developers integrate Azure AI's content moderation APIs into their C# applications to detect and filter potentially harmful or inappropriate content in text, images, and videos. The demo utilizes Azure Cognitive Services to perform content analysis and classification.
-Features
-
-    Text moderation: Analyze text content for potential risks, including profanity, personal information, and harmful language.
-    Image moderation: Detect inappropriate content in images using the Azure Content Moderator API.
-    Video moderation: Evaluate videos for explicit content using Azure’s Video Indexer.
-    Real-time results: Get immediate feedback and suggestions for handling detected unsafe content.
-    Customizable thresholds: Adjust moderation sensitivity to meet your specific needs.
-
+This repository contains a sample implementation of the Azure Content Safety API, which allows you to analyze and moderate text and image content for harmful or inappropriate material. The project demonstrates how to interact with the Azure Content Safety API to detect unsafe content based on various categories, such as hate speech, self-harm, sexual content, and violence.
 Prerequisites
 
-Before you run the demo, make sure you have the following:
+    An Azure account with access to the Azure Content Safety API.
+    .NET 6 or later installed on your machine.
+    A subscription key for the Azure Content Safety API.
 
-    Microsoft Azure account:
-        You will need an Azure account with access to the Cognitive Services APIs, including the Content Moderator API.
-        Create a Cognitive Services resource in the Azure portal.
+Getting Started
 
-    .NET SDK:
-        Install .NET SDK (version 6.0 or later).
+Follow these steps to set up and run the sample project:
+1. Set up the Azure Content Safety API
 
-    API Keys:
-        Once you have created the Cognitive Services resource, you'll need the API keys from the Azure portal to authenticate your requests.
+Before using the API, you need to create an Azure Content Safety resource in the Azure portal.
 
-    Visual Studio (optional):
-        If you're using Visual Studio, you can open the solution directly and build the project.
+    Go to the Azure Portal.
+    Search for Content Safety in the marketplace and create a new resource.
+    After creating the resource, get the endpoint URL and subscription key.
 
-Setup Instructions
+2. Clone this repository
 
-    Clone the repository:
+Clone this repository to your local machine:
 
-git clone https://github.com/yourusername/Azure-AI-Content-Safety-Demo.git
+git clone https://github.com/sandeeppaldotnet/Azure-AI-Content-Safety-Demo.git
+cd azure-content-safety-sample
 
-Navigate into the project directory:
+3. Configure the project
 
-cd Azure-AI-Content-Safety-Demo
+Open the project in your preferred IDE or text editor. In the Program.cs file, replace the placeholders for the endpoint and subscription key with the values obtained from your Azure Content Safety resource:
 
-Install the required NuGet packages:
+string endpoint = "your-endpoint-url"; // The endpoint URL for your Content Safety API resource
+string subscriptionKey = "your-subscription-key"; // Your Content Safety API subscription key
 
-dotnet restore
+4. Run the project
 
-Configure the API keys:
-
-    Open the appsettings.json file in the project and add your Azure Content Moderator API key and endpoint URL:
-
-    {
-      "AzureContentModerator": {
-        "Endpoint": "your-azure-endpoint",
-        "ApiKey": "your-api-key"
-      }
-    }
-
-Running the Demo
-
-To run the application, use the following command:
+To run the project, open a terminal/command prompt, navigate to the project directory, and execute the following:
 
 dotnet run
 
-This will launch the application, and you can interact with it via the console or UI (depending on your project setup). The app will process the sample content or allow you to input your own content for moderation.
-Example
+The application will prompt you to enter the content (text) that you want to analyze. Once entered, it will send the content to the Azure Content Safety API and display the moderation results.
+5. Customize Reject Thresholds
 
-    To check text content for inappropriate language:
+The rejectThresholds dictionary in the Program.cs file allows you to set custom rejection thresholds for each category. Adjust these values to meet your moderation requirements.
 
-var textToAnalyze = "This is some sample text.";
-var moderationResult = await contentModeratorClient.ModerateTextAsync(textToAnalyze);
-Console.WriteLine(moderationResult);
+Dictionary<Category, int> rejectThresholds = new Dictionary<Category, int> {
+    { Category.Hate, 4 },
+    { Category.SelfHarm, 4 },
+    { Category.Sexual, 4 },
+    { Category.Violence, 4 }
+};
 
-    To analyze an image for inappropriate content:
+6. View the Detection Results
 
-var imageUrl = "https://example.com/image.jpg";
-var imageAnalysisResult = await contentModeratorClient.ModerateImageAsync(imageUrl);
-Console.WriteLine(imageAnalysisResult);
+The program will display the detection results, including the action (Accept or Reject) for each category, based on the severity score of the content.
+Project Structure
 
-Features in Action
+    ContentSafetySampleCode: Contains the main logic for interacting with the Azure Content Safety API, handling both text and image analysis.
+    Program.cs: The entry point of the application, which drives the content detection and decision-making process.
+    DetectionResult and related classes: Used to model the data sent to and received from the API.
+    Enums: Definitions for media types (Text, Image), content categories (Hate, SelfHarm, Sexual, Violence), and actions (Accept, Reject).
 
-This project showcases several key features of Azure’s AI-powered content safety tools, including:
+Key Classes and Methods
 
-    Text Moderation: Detects offensive language and personal information.
-    Image Moderation: Flags images with explicit content or disturbing imagery.
-    Video Moderation: Analyzes video files for harmful or offensive material.
+    ContentSafety: This is the main class that interacts with the Azure Content Safety API. It provides methods to:
+        Build request URLs and payloads (BuildUrl, BuildRequestBody).
+        Send content for detection (Detect).
+        Deserialize the API response (DeserializeDetectionResult).
+        Make a decision based on the results (MakeDecision).
+
+    DetectionResult: The base class for API responses, containing a list of category analyses and severity scores.
+
+    Decision: Represents the action recommended by the system based on the detected content's severity.
+
+Error Handling
+
+If an error occurs during the content detection process, a custom exception DetectionException is thrown. This provides details about the error code and message, which you can use for debugging.
+Example:
+
+Error: 400
+{
+    "error": {
+        "code": "InvalidContent",
+        "message": "The content provided is invalid for analysis."
+    }
+}
