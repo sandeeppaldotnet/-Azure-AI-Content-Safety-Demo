@@ -1,0 +1,14 @@
+G:\azure\azure-content-safety-demo\bin\Debug\net8.0\azure-content-safety-demo.exe
+G:\azure\azure-content-safety-demo\bin\Debug\net8.0\azure-content-safety-demo.deps.json
+G:\azure\azure-content-safety-demo\bin\Debug\net8.0\azure-content-safety-demo.runtimeconfig.json
+G:\azure\azure-content-safety-demo\bin\Debug\net8.0\azure-content-safety-demo.dll
+G:\azure\azure-content-safety-demo\bin\Debug\net8.0\azure-content-safety-demo.pdb
+G:\azure\azure-content-safety-demo\obj\Debug\net8.0\azure-content-safety-demo.GeneratedMSBuildEditorConfig.editorconfig
+G:\azure\azure-content-safety-demo\obj\Debug\net8.0\azure-content-safety-demo.AssemblyInfoInputs.cache
+G:\azure\azure-content-safety-demo\obj\Debug\net8.0\azure-content-safety-demo.AssemblyInfo.cs
+G:\azure\azure-content-safety-demo\obj\Debug\net8.0\azure-content-safety-demo.csproj.CoreCompileInputs.cache
+G:\azure\azure-content-safety-demo\obj\Debug\net8.0\azure-content-safety-demo.dll
+G:\azure\azure-content-safety-demo\obj\Debug\net8.0\refint\azure-content-safety-demo.dll
+G:\azure\azure-content-safety-demo\obj\Debug\net8.0\azure-content-safety-demo.pdb
+G:\azure\azure-content-safety-demo\obj\Debug\net8.0\azure-content-safety-demo.genruntimeconfig.cache
+G:\azure\azure-content-safety-demo\obj\Debug\net8.0\ref\azure-content-safety-demo.dll
